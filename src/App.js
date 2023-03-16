@@ -4,7 +4,7 @@ import React  from 'react'
 import Tasks from './components/Tasks'
 import AddTask from './components/AddTask'
 import {v4 as uuidv4} from 'uuid'
-
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 const App = ()=> { 
 
   const [tasks, setTasks] = useState([
@@ -32,6 +32,11 @@ const App = ()=> {
     })
      setTasks(newTasks)
   }
+
+  const handleTaskDeletion = (taskId) =>{
+    const newTasks = tasks.filter(task => task.id !== taskId)
+    setTasks(newTasks)
+  }
  
   const handleTaskAddition = (taskTitle) =>{
     const newTasks = [
@@ -47,12 +52,13 @@ const App = ()=> {
 
   }
   return(
-    <div className='container'>
-      <h1 className='titulo'>Minhas Tarefas</h1> 
 
-      <AddTask handleTaskAddition={handleTaskAddition} />
-      <Tasks tasks={tasks} handleTaskClick={handleTaskClick} />
-    </div>
+      <div className='container'>
+        <h1 className='titulo'>Minhas Tarefas</h1> 
+        <AddTask handleTaskAddition={handleTaskAddition} />
+        <Tasks tasks={tasks} handleTaskClick={handleTaskClick} handleTaskDeletion={handleTaskDeletion} />
+      </div>
+
   )
 }
 

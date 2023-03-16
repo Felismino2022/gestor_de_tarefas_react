@@ -8,8 +8,13 @@ const AddTask = ({handleTaskAddition}) =>{
 
     const [inputData, setInputData] = useState('')
     
+    
 
     const handleAddTaskClick = () =>{
+        if(!inputData){
+            //quando o utilizador não digita nada
+            return false
+        }
         handleTaskAddition(inputData)
         setInputData("")
     }
